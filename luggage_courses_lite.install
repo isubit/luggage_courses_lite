@@ -1,0 +1,24 @@
+<?php
+
+/**
+ * Implements hook_install().
+ */
+function luggage_courses_lite_install() {
+  // Populate the semester vocabulary with default terms.
+  $semesters = array(
+    'Spring',
+    'Fall',
+    'Summer'
+  );
+
+  $vocabulary = taxonomy_vocabulary_machine_name_load('semester');
+
+  foreach ($semesters as $semester) {
+    $term = (object) array(
+      'name' => $semester,
+      'vid' => $vocabulary->vid,
+    );
+
+    taxonomy_term_save($term);
+  }
+}
