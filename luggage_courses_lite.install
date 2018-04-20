@@ -5,6 +5,17 @@
  */
 function luggage_courses_lite_install() {
   // Populate the semester vocabulary with default terms.
+
+  // We need to create the vocabulary here because hook_install() happens
+  // before features creates the vocabulary.
+
+  $new_vocabulary = (object) array(
+    'name' => 'Semester',
+    'machine_name' => 'semester',
+  );
+  taxonomy_vocabulary_save($new_vocabulary);
+
+  // Create the semester terms
   $semesters = array(
     'Spring',
     'Fall',
